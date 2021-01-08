@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace StuffAndThings
+namespace Playground
 {
     public class Braces
     {

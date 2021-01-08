@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StuffAndThings
+namespace Playground
 {
     class Program
     {
