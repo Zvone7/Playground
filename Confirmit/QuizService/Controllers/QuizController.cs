@@ -1,0 +1,161 @@
+﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
+using QuizService.Infrastructure;
+using QuizService.Model;
+using System.Collections.Generic;
+using System.Data.Common;
+
+namespace QuizService.Controllers
+{
+    [Route("api/quizzes")]
+    public class QuizController : Controller
+    {
+        /// TODO 
+        ///       - remove SQL from controller 
+        ///             - either move to a different class or 
+        ///             - replace everything with a different ORM (EF Core)
+        ///             
+        ///       - wrap all the return objects in a unified model: 
+        ///             { T data, IEnumerable<ErrorCodeEnum, ErrorData> }
+        ///             
+        ///       - replace {id}/questions/{qid}/answers/{aid} route with
+        ///       several controllers for each type Quiz/Question/Answer
+
+
+        private readonly DbConnection _connection;
+        private readonly IQuizLogic _quizLogic;
+
+        public QuizController(
+            DbConnection connection,
+            IQuizLogic quizLogic)
+        {
+            _connection = connection;
+            _quizLogic = quizLogic;
+        }
+
+        // GET api/quizzes
+        [HttpGet]
+        public IEnumerable<QuizResponseModel> Get()
+        {
+            var quizzes = _quizLogic.Get();
+            return quizzes == null ? (IEnumerable<QuizResponseModel>)NotFound() : quizzes;
+        }
+
+        //// GET api/quizzes/5
+        [HttpGet("{id}")]
+        public object Get(int id)
+        {
+            var quiz = _quizLogic.Get(id);
+            return quiz == null ? NotFound() : (object)quiz;
+        }
+
+        // POST api/quizzes
+        [HttpPost]
+        public IActionResult Post([FromBody]QuizCreateModel value)
+        {
+            var sql = $"INSERT INTO Quiz (Title) VALUES('{value.Title}'); SELECT LAST_INSERT_ROWID();";
+            var id = _connection.ExecuteScalar(sql);
+            return Created($"/api/quizzes/{id}", null);
+        }
+
+        // PUT api/quizzes/5
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody]QuizUpdateModel value)
+        {
+            const string sql = "UPDATE Quiz SET Title = @Title WHERE Id = @Id";
+            int rowsUpdated = _connection.Execute(sql, new {Id = id, Title = value.Title});
+            if (rowsUpdated == 0)
+                return NotFound();
+            return NoContent();
+        }
+
+        // DELETE api/quizzes/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            const string sql = "DELETE FROM Quiz WHERE Id = @Id";
+            int rowsDeleted = _connection.Execute(sql, new {Id = id});
+            if (rowsDeleted == 0)
+                return NotFound();
+            return NoContent();
+        }
+
+        // POST api/quizzes/5/questions
+        [HttpPost]
+        [Route("{id}/questions")]
+        public IActionResult PostQuestion(int id, [FromBody]QuestionCreateModel value)
+        {
+            try
+            {
+                const string sql = "INSERT INTO Question (Text, QuizId) VALUES(@Text, @QuizId); SELECT LAST_INSERT_ROWID();";
+                var questionId = _connection.ExecuteScalar(sql, new { Text = value.Text, QuizId = id });
+                return Created($"/api/quizzes/{id}/questions/{questionId}", null);
+            }
+            catch (SqliteException e)
+            {
+                // threw "FOREIGN KEY constraint failed"
+                return NotFound();
+            }
+        }
+
+        // PUT api/quizzes/5/questions/6
+        [HttpPut("{id}/questions/{qid}")]
+        public IActionResult PutQuestion(int id, int qid, [FromBody]QuestionUpdateModel value)
+        {
+            const string sql = "UPDATE Question SET Text = @Text, CorrectAnswerId = @CorrectAnswerId WHERE Id = @QuestionId";
+            int rowsUpdated = _connection.Execute(sql, new {QuestionId = qid, Text = value.Text, CorrectAnswerId = value.CorrectAnswerId});
+            if (rowsUpdated == 0)
+                return NotFound();
+            return NoContent();
+        }
+
+        // DELETE api/quizzes/5/questions/6
+        [HttpDelete]
+        [Route("{id}/questions/{qid}")]
+        public IActionResult DeleteQuestion(int id, int qid)
+        {
+            const string sql = "DELETE FROM Question WHERE Id = @QuestionId";
+            _connection.ExecuteScalar(sql, new {QuestionId = qid});
+            return NoContent();
+        }
+
+        // POST api/quizzes/5/questions/6/answers
+        [HttpPost]
+        [Route("{id}/questions/{qid}/answers")]
+        public IActionResult PostAnswer(int id, int qid, [FromBody]AnswerCreateModel value)
+        {
+            const string sql = "INSERT INTO Answer (Text, QuestionId) VALUES(@Text, @QuestionId); SELECT LAST_INSERT_ROWID();";
+            var answerId = _connection.ExecuteScalar(sql, new {Text = value.Text, QuestionId = qid});
+            return Created($"/api/quizzes/{id}/questions/{qid}/answers/{answerId}", null);
+        }
+
+        // PUT api/quizzes/5/questions/6/answers/7
+        [HttpPut("{id}/questions/{qid}/answers/{aid}")]
+        public IActionResult PutAnswer(int id, int qid, int aid, [FromBody]AnswerUpdateModel value)
+        {
+            const string sql = "UPDATE Answer SET Text = @Text WHERE Id = @AnswerId";
+            int rowsUpdated = _connection.Execute(sql, new {AnswerId = qid, Text = value.Text});
+            if (rowsUpdated == 0)
+                return NotFound();
+            return NoContent();
+        }
+
+        // DELETE api/quizzes/5/questions/6/answers/7
+        [HttpDelete]
+        [Route("{id}/questions/{qid}/answers/{aid}")]
+        public IActionResult DeleteAnswer(int id, int qid, int aid)
+        {
+            const string sql = "DELETE FROM Answer WHERE Id = @AnswerId";
+            _connection.ExecuteScalar(sql, new {AnswerId = aid});
+            return NoContent();
+        }
+        
+        //// GET api/quizzes/5/questions/1/apple
+        [HttpPost("{id}/questions/{qid}/answertest")]
+        public ActionResult<int> ValidateResponse(int id, int qid, [FromBody]AnswerTest answerTest)
+        {
+            return _quizLogic.TestResponse(id, qid, answerTest) ? 1 : 0;
+        }
+    }
+}
