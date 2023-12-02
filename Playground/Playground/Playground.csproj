@@ -6,4 +6,39 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Update="aoc2023\t1\part1_input_short.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="aoc2023\t1\part1_input_full.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="aoc2023\t1\part2_input_short.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="aoc2023\t1\part2_input_full.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t1\part1_input_full.txt" />
+    <Content Include="aoc2023\t1\part1_input_full.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t1\part1_input_short.txt" />
+    <Content Include="aoc2023\t1\part1_input_short.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t1\part2_input_full.txt" />
+    <Content Include="aoc2023\t1\part2_input_full.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t1\part2_input_short.txt" />
+    <Content Include="aoc2023\t1\part2_input_short.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t1\test.txt" />
+    <Content Include="aoc2023\t1\test.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
