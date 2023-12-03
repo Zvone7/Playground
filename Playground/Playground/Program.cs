@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Threading.Channels;
 using Playground.aoc2023.t1;
+using Playground.aoc2023.t2;
 
 var stopwatch = new Stopwatch();
 stopwatch.Start();
 Console.WriteLine($"{DateTime.Now} Playground started.");
-// var task = new Task1();
-var task = new Task1_debug();
+var task = new Task1();
+// var task = new Task1_debug();
 task.Main();
 Console.WriteLine($"{DateTime.Now} Playground finished.");
 Console.WriteLine($"{DateTime.Now} Time elapsed {stopwatch.ElapsedMilliseconds} ms.");

@@ -4,9 +4,9 @@ public class Task1
 {
     public void Main()
     {
-        var fileName = "part2_input_short.txt";
-        // var fileName = "part2_input_full.txt";
-        var fullFilePath = $"{Directory.GetCurrentDirectory()}\\aoc2023\\t1\\{fileName}";
+        // var fileName = "part2_input_short.txt";
+        var fileName = "part2_input_full.txt";
+        var fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "aoc2023", "t1", fileName);
         if (!File.Exists(fullFilePath))
         {
             throw new FileNotFoundException("Can't find input file!");
@@ -15,8 +15,10 @@ public class Task1
         var lines = File.ReadAllLines(fullFilePath);
 
         // CalcPart1(lines);
-        CalcPart2(lines, true);
+        // CalcPart2(lines, true);
+        Task1Stolen.Day1Task2(lines.ToList());
     }
+    
 
     void CalcPart1(string[] lines)
     {

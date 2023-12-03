@@ -7,7 +7,7 @@ public class Task1_debug
         // var fileName = "test.txt";
         // var fileName = "part2_input_short.txt";
         var fileName = "part2_input_full.txt";
-        var fullFilePath = $"{Directory.GetCurrentDirectory()}\\aoc2023\\t1\\{fileName}";
+        var fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "aoc2023", "t1", fileName);
         if (!File.Exists(fullFilePath))
         {
             throw new FileNotFoundException("Can't find input file!");
