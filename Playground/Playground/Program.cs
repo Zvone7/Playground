@@ -8,7 +8,6 @@ var stopwatch = new Stopwatch();
 stopwatch.Start();
 Console.WriteLine($"{DateTime.Now} Playground started.");
 new Task3().Main();
-// new Task3_a().Main();
 Console.WriteLine($"{DateTime.Now} Playground finished.");
 Console.WriteLine($"{DateTime.Now} Time elapsed {stopwatch.ElapsedMilliseconds} ms.");
 
