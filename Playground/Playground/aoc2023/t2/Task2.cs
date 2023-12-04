@@ -106,13 +106,13 @@ public class Task2
         return gameInfos;
     }
 
-    public class GameInfo
+    class GameInfo
     {
         public int GameId { get; set; }
         public List<CubeInfo> CubeInfos { get; set; }
     }
 
-    public class CubeInfo
+    class CubeInfo
     {
         public int RedCubes { get; set; }
         public int GreenCubes { get; set; }

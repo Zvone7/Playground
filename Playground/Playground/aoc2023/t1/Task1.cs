@@ -14,9 +14,8 @@ public class Task1
 
         var lines = File.ReadAllLines(fullFilePath);
 
-        // CalcPart1(lines);
+        CalcPart1(lines);
         // CalcPart2(lines, true);
-        Task1Stolen.Day1Task2(lines.ToList());
     }
     
 

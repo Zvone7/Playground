@@ -7,7 +7,7 @@ using Playground.aoc2023.t3;
 var stopwatch = new Stopwatch();
 stopwatch.Start();
 Console.WriteLine($"{DateTime.Now} Playground started.");
-new Task3().Main();
+new Task4().Main();
 Console.WriteLine($"{DateTime.Now} Playground finished.");
 Console.WriteLine($"{DateTime.Now} Time elapsed {stopwatch.ElapsedMilliseconds} ms.");
 
