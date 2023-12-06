@@ -1,7 +1,6 @@
-using System.ComponentModel;
 using System.Diagnostics;
 
-namespace Playground.aoc2023.t3;
+namespace Playground.aoc2023.t4;
 
 public class Task4
 {
