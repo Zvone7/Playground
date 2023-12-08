@@ -91,6 +91,26 @@
     <Content Include="aoc2023\t7\3.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Remove="aoc2023\t8\1.txt" />
+    <Content Include="aoc2023\t8\1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t8\2.txt" />
+    <Content Include="aoc2023\t8\2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t8\3.txt" />
+    <Content Include="aoc2023\t8\3.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t8\4.txt" />
+    <Content Include="aoc2023\t8\4.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="aoc2023\t8\5.txt" />
+    <Content Include="aoc2023\t8\5.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

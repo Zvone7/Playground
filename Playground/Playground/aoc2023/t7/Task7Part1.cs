@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Playground.aoc2023.t6.part1;
+namespace Playground.aoc2023.t7.part1;
 
 public class Task7Part1
 {
