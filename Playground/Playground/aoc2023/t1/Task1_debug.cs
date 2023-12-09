@@ -4,9 +4,9 @@ public class Task1_debug
 {
     public void Main()
     {
-        // var fileName = "test.txt";
-        // var fileName = "part2_input_short.txt";
-        var fileName = "part2_input_full.txt";
+        var fileName = "5.txt";
+        // fileName = "3.txt";
+        fileName = "4.txt";
         var fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "aoc2023", "t1", fileName);
         if (!File.Exists(fullFilePath))
         {

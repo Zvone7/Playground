@@ -9,8 +9,8 @@ public class Task2
     public const Int32 MaxGreenCubes = 13;
     public void Main()
     {
-        var fileName = "p1_1.txt";
-        fileName = "p1_2.txt";
+        var fileName = "1.txt";
+        fileName = "2.txt";
         var fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "aoc2023", "t2", fileName);
         if (!File.Exists(fullFilePath))
         {

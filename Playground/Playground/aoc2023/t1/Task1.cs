@@ -4,8 +4,10 @@ public class Task1
 {
     public void Main()
     {
-        // var fileName = "part2_input_short.txt";
-        var fileName = "part2_input_full.txt";
+        var fileName = "1.txt";
+        fileName = "2.txt";
+        // fileName = "3.txt";
+        // fileName = "4.txt";
         var fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "aoc2023", "t1", fileName);
         if (!File.Exists(fullFilePath))
         {
