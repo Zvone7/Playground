@@ -1,13 +1,15 @@
 ﻿using System.Diagnostics;
 using Playground.aoc2023.t8.part1;
 using Playground.aoc2023.t8.part2;
+using Playground.aoc2023.t9.part1;
+using Playground.aoc2023.t9.part2;
 
 var stopwatch = new Stopwatch();
 stopwatch.Start();
 Console.WriteLine($"{DateTime.Now} Playground started.");
 Console.WriteLine($"------------------------------------------");
-// new Task8Part1().Main();
-new Task8Part2().Main();
+// new Task9Part1().Main();
+new Task9Part2().Main();
 Console.WriteLine($"------------------------------------------");
 Console.WriteLine($"{DateTime.Now} Playground finished.");
 Console.WriteLine($"{DateTime.Now} Time elapsed {stopwatch.ElapsedMilliseconds} ms.");
