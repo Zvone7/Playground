@@ -1,6 +1,6 @@
 ﻿using Playground.aoc2023.t1;
-using Playground.aoc2023.t6.part1;
-using Playground.aoc2023.t6.part2;
+using Playground.aoc2023.t7.part1;
+using Playground.aoc2023.t7.part2;
 
 namespace Playground.Tests;
 
